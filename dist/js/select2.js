@@ -5315,7 +5315,8 @@ S2.define('select2/core',[
       return this.$element.val();
     }
 
-    var newVal = args[0];
+    var newVal = args[0],
+        trigger = typeof args[1] !== 'undefined' ? args[1] : true ;
 
     if ($.isArray(newVal)) {
       newVal = $.map(newVal, function (obj) {
@@ -5323,7 +5324,10 @@ S2.define('select2/core',[
       });
     }
 
-    this.$element.val(newVal).trigger('change');
+    this.$element.val(newVal);
+    if (trigger) {
+      this.$element.trigger('change');
+    }
   };
 
   Select2.prototype.destroy = function () {
